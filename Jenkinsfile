@@ -6,8 +6,12 @@ pipeline {
         stage('Build jar file') { 
             steps {
                 script {
-                  sh "mvn clean install -DskipTests" 
+                  //sh "mvn clean install -DskipTests" 
                 }
+				withMaven(maven: 'Maven339', jdk: 'JDK8', mavenSettingsConfig: 'bb40ec16-56e1-440a-8fdd-97af1a8b248f', mavenLocalRepo: '${BASE}/maven-repositories/${EXECUTOR_NUMBER}', options: [artifactsPublisher(disabled: true)])
+					{
+							sh "mvn clean install -DskipTests"
+					}
             }
         }        
         stage('Build and Create docker image') { 
