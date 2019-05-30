@@ -21,7 +21,7 @@ pipeline {
                         $class: 'GitSCM',
                         doGenerateSubmoduleConfigurations: false,
                         userRemoteConfigs: [[
-                            url: 'https://github.com/satishcheppalli/HelloWorld.git'
+                            url: 'https://satishcheppalli:80c90e1af6c8a11572f66dedde7b85ab50f73b6a@github.com/satishcheppalli/HelloWorld.git'
                           ]],
                         branches: [ [name: '*/master'] ]
                       ])
@@ -36,7 +36,7 @@ pipeline {
                         $class: 'GitSCM',
                         doGenerateSubmoduleConfigurations: false,
                         userRemoteConfigs: [[
-                            url: 'https://github.com/satishcheppalli/HelloWorld.git'
+                            url: 'https://satishcheppalli:80c90e1af6c8a11572f66dedde7b85ab50f73b6a@github.com/satishcheppalli/HelloWorld.git'
                           ]],
                         branches: [ [name: '*/master'] ]
                       ])
@@ -56,7 +56,7 @@ pipeline {
                         $class: 'GitSCM',
                         doGenerateSubmoduleConfigurations: false,
                         userRemoteConfigs: [[
-                            url: 'https://github.com/satishcheppalli/HelloWorld.git'
+                            url: 'https://satishcheppalli:80c90e1af6c8a11572f66dedde7b85ab50f73b6a@github.com/satishcheppalli/HelloWorld.git'
                           ]],
                         branches: [ [name: '*/master'] ]
                       ])
