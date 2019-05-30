@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: HelloWorld
+  labels:
+    app: HelloWorld
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app: HelloWorld
+  template:
+    metadata:
+      labels:
+        app: HelloWorld
+    spec:
+      containers:
+      - name: HelloWorld
+        image: iad.ocir.io/fedexoraclecloud/fsc/HelloWorld:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+        env:
+        - name: DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: db-credentials
+              key: username
+        - name: DB_PASS
+          valueFrom:
+            secretKeyRef:
+              name: db-credentials
+              key: password
+      imagePullSecrets:  
+      - name: satishocirsecret
