@@ -20,7 +20,7 @@ spec:
         image: iad.ocir.io/fedexoraclecloud/fsc/HelloWorld:latest
         imagePullPolicy: Always
         ports:
-        - containerPort: 8080
+        - containerPort: 8181
         env:
         - name: DB_USER
           valueFrom:

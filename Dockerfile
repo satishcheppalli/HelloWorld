@@ -5,6 +5,6 @@ RUN addgroup spring && adduser -S spring spring && echo spring: | chpasswd && ch
 
 USER spring
 COPY target/*.jar /opt/app/server.jar
-EXPOSE 8080
+EXPOSE 8181
 
 ENTRYPOINT exec java $JAVA_OPTS -jar /opt/app/server.jar
