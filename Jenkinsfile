@@ -25,7 +25,7 @@ pipeline {
                           ]],
                         branches: [ [name: '*/master'] ]
                       ])
-                sh "docker build -f Dockerfile -t iad.ocir.io/fedexoraclecloud/fsc/HelloWorld:${scmVars.GIT_COMMIT} ." 
+                sh "docker build -f Dockerfile -t iad.ocir.io/fedexoraclecloud/fsc/helloworld:${scmVars.GIT_COMMIT} ." 
                 }
             }
         }
@@ -42,7 +42,7 @@ pipeline {
                       ])
                 sh "docker login -u 'fedexoraclecloud/oracleidentitycloudservice/2750344' -p 'Ur6G[M>frZ5qMsWp{<QP' iad.ocir.io"
     
-                sh "docker push iad.ocir.io/fedexoraclecloud/fsc/HelloWorld:${scmVars.GIT_COMMIT}" 
+                sh "docker push iad.ocir.io/fedexoraclecloud/fsc/helloworld:${scmVars.GIT_COMMIT}" 
                 env.GIT_COMMIT = scmVars.GIT_COMMIT
                 sh "export GIT_COMMIT=${env.GIT_COMMIT}"
                 }
@@ -62,7 +62,7 @@ pipeline {
                       ])
 					
            // sh("kubectl get ns ${namespace} || kubectl create ns ${namespace}")    
-            sh("sed -i 's#iad.ocir.io/fedexoraclecloud/fsc/HelloWorld:latest#iad.ocir.io/fedexoraclecloud/fsc/HelloWorld:${scmVars.GIT_COMMIT}#g' ./k8s/satish-ns/*.yml")    
+            sh("sed -i 's#iad.ocir.io/fedexoraclecloud/fsc/helloworld:latest#iad.ocir.io/fedexoraclecloud/fsc/helloworld:${scmVars.GIT_COMMIT}#g' ./k8s/satish-ns/*.yml")    
             sh("kubectl --namespace=satish-ns apply -f k8s/satish-ns/deployment.yml")
             sh("kubectl --namespace=satish-ns apply -f k8s/satish-ns/service.yml")        
                
