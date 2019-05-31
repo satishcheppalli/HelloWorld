@@ -13,11 +13,11 @@ spec:
   template:
     metadata:
       labels:
-        app: HelloWorld
+        app: helloworld
     spec:
       containers:
-      - name: HelloWorld
-        image: iad.ocir.io/fedexoraclecloud/fsc/HelloWorld:latest
+      - name: helloworld
+        image: iad.ocir.io/fedexoraclecloud/fsc/helloworld:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 8181
