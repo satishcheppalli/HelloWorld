@@ -1,15 +1,15 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: HelloWorld
+  name: helloworld
   labels:
-    app: HelloWorld
+    app: helloworld
 spec:
   replicas: 1
   revisionHistoryLimit: 0
   selector:
     matchLabels:
-      app: HelloWorld
+      app: helloworld
   template:
     metadata:
       labels:
