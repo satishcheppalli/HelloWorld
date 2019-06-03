@@ -20,6 +20,6 @@ spec:
         image: iad.ocir.io/fedexoraclecloud/fsc/helloworld:latest
         imagePullPolicy: Always
         ports:
-        - containerPort: 8181
+        - containerPort: 8383
       imagePullSecrets:  
       - name: satishocirsecret
