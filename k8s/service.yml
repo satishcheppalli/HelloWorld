@@ -7,8 +7,8 @@ metadata:
 spec:
   type: LoadBalancer
   ports:
-  - port: 83
-    targetPort: 8383
+  - port: 8484
+    targetPort: 8484
     protocol: TCP
   selector:
     app: helloworld
