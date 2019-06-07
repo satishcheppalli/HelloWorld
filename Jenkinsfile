@@ -14,7 +14,7 @@ node {
 //    stages {
 
         stage('Build jar file') { 
-            steps {
+          //  steps {
                 //script {
                   //sh "mvn clean install -DskipTests" 
                 //}
@@ -22,7 +22,7 @@ node {
 					{
 							sh "mvn clean install -DskipTests"
 					}
-            }
+          //  }
         }        
         stage('Build and Create docker image') { 
            // steps {
