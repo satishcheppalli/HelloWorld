@@ -1,5 +1,15 @@
 pipeline {
     agent any
+	def env = 'dev'
+	def project = 'fsc'  
+	def appName = 'helloworld'    
+	def imageVersion = "${env.BUILD_NUMBER}.0.0"  
+	def namespace = 'satish-ns'  
+	def image = "iad.ocir.io/fedexoraclecloud/${project}/${appName}"
+	def gitRepoUrl = 'https://github.com/satishcheppalli/HelloWorld.git'
+	def branch = '*/master'
+	def userName = 'fedexoraclecloud/oracleidentitycloudservice/2750344'
+	def pwd = 'Ur6G[M>frZ5qMsWp{<QP'
     
     stages {
 
@@ -21,11 +31,11 @@ pipeline {
                         $class: 'GitSCM',
                         doGenerateSubmoduleConfigurations: false,
                         userRemoteConfigs: [[
-                            url: 'https://github.com/satishcheppalli/HelloWorld.git'
+                            url: "${gitRepoUrl}"
                           ]],
-                        branches: [ [name: '*/master'] ]
+                        branches: [ [name: "${branch}"] ]
                       ])
-                sh "docker build -f Dockerfile -t iad.ocir.io/fedexoraclecloud/fsc/helloworld:${scmVars.GIT_COMMIT} ." 
+                sh "docker build -f Dockerfile -t ${image}:${imageVersion} ." 
                 }
             }
         }
@@ -36,14 +46,14 @@ pipeline {
                         $class: 'GitSCM',
                         doGenerateSubmoduleConfigurations: false,
                         userRemoteConfigs: [[
-                            url: 'https://github.com/satishcheppalli/HelloWorld.git'
+                            url: "${gitRepoUrl}"
                           ]],
                         branches: [ [name: '*/master'] ]
                       ])
-                sh "docker login -u 'fedexoraclecloud/oracleidentitycloudservice/2750344' -p 'Ur6G[M>frZ5qMsWp{<QP' iad.ocir.io"
+                sh "docker login -u ${userName} -p ${pwd} iad.ocir.io"
     
-                sh "docker push iad.ocir.io/fedexoraclecloud/fsc/helloworld:${scmVars.GIT_COMMIT}" 
-                env.GIT_COMMIT = scmVars.GIT_COMMIT
+                sh "docker push ${image}:${imageVersion}" 
+                env.GIT_COMMIT = "${imageVersion}"
                 sh "export GIT_COMMIT=${env.GIT_COMMIT}"
                 }
                }
@@ -56,16 +66,16 @@ pipeline {
                         $class: 'GitSCM',
                         doGenerateSubmoduleConfigurations: false,
                         userRemoteConfigs: [[
-                            url: 'https://github.com/satishcheppalli/HelloWorld.git'
+                            url: "${gitRepoUrl}"
                           ]],
-                        branches: [ [name: '*/master'] ]
+                        branches: [ [name: "${branch}"] ]
                       ])
 					
            // sh("kubectl get ns ${namespace} || kubectl create ns ${namespace}")    
-            sh("sed -i 's#iad.ocir.io/fedexoraclecloud/fsc/helloworld:latest#iad.ocir.io/fedexoraclecloud/fsc/helloworld:${scmVars.GIT_COMMIT}#g' ./k8s/*.yml") 
+            sh("sed -i 's#${image}:latest#${image}:${imageVersion}#g' ./k8s/${env}/*.yml") 
 			///sh("sed -i 's#namespace: dev#namespace: satish-ns#g' ./k8s/*.yml")    			
-            sh("kubectl --namespace=satish-ns apply -f k8s/deployment.yml")
-            sh("kubectl --namespace=satish-ns apply -f k8s/service.yml")        
+            sh("kubectl --namespace=${namespace} apply -f k8s/${env}/deployment.yml")
+            sh("kubectl --namespace=${namespace} apply -f k8s/${env}/service.yml")        
                //sh("kubectl apply -f k8s/deployment.yml")
 			   //sh("kubectl apply -f k8s/service.yml")   
 						}
