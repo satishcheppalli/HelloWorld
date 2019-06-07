@@ -50,7 +50,7 @@ node {
                           ]],
                         branches: [ [name: '*/master'] ]
                       ])
-                sh "docker login -u ${userName} -p ${pwd} iad.ocir.io"
+                sh "docker login -u ${userName} -p 'Ur6G[M>frZ5qMsWp{<QP' iad.ocir.io"
     
                 sh "docker push ${image}:${imageVersion}" 
                 env.GIT_COMMIT = "${imageVersion}"
