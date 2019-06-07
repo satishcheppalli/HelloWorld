@@ -78,7 +78,7 @@ node {
             sh("kubectl --namespace=${namespace} apply -f k8s/${env}/service.yml")        
                //sh("kubectl apply -f k8s/deployment.yml")
 			   //sh("kubectl apply -f k8s/service.yml")   
-						//}
+						}
 				//	}
 			  }
 //		}
