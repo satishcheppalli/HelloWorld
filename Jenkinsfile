@@ -11,7 +11,7 @@ node {
 	def userName = 'fedexoraclecloud/oracleidentitycloudservice/2750344'
 	def pwd = 'Ur6G[M>frZ5qMsWp{<QP'
     
-    stages {
+//    stages {
 
         stage('Build jar file') { 
             steps {
@@ -81,5 +81,5 @@ node {
 						}
 					}
 			  }
-		}
+//		}
 }
