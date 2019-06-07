@@ -64,8 +64,8 @@ pipeline {
            // sh("kubectl get ns ${namespace} || kubectl create ns ${namespace}")    
             sh("sed -i 's#iad.ocir.io/fedexoraclecloud/fsc/helloworld:latest#iad.ocir.io/fedexoraclecloud/fsc/helloworld:${scmVars.GIT_COMMIT}#g' ./k8s/*.yml") 
 			///sh("sed -i 's#namespace: dev#namespace: satish-ns#g' ./k8s/*.yml")    			
-            sh("kubectl --namespace=satish-ns apply -f k8s/deployment.yml")
-            sh("kubectl --namespace=satish-ns apply -f k8s/service.yml")        
+            sh("kubectl --namespace=satish-ns apply -f k8s/dev/deployment.yml")
+            sh("kubectl --namespace=satish-ns apply -f k8s/dev/service.yml")        
                //sh("kubectl apply -f k8s/deployment.yml")
 			   //sh("kubectl apply -f k8s/service.yml")   
 						}
