@@ -25,7 +25,7 @@ node {
             }
         }        
         stage('Build and Create docker image') { 
-            steps {
+           // steps {
                 script {
                     def scmVars = checkout([
                         $class: 'GitSCM',
@@ -37,10 +37,10 @@ node {
                       ])
                 sh "docker build -f Dockerfile -t ${image}:${imageVersion} ." 
                 }
-            }
+           // }
         }
         stage('Push image to OCIR') { 
-            steps {
+           // steps {
                 script {
                     def scmVars = checkout([
                         $class: 'GitSCM',
@@ -56,11 +56,11 @@ node {
                 env.GIT_COMMIT = "${imageVersion}"
                 sh "export GIT_COMMIT=${env.GIT_COMMIT}"
                 }
-               }
+             //  }
             }
         
         stage('Deploy Application') {  
-			steps {	
+			//steps {	
 				script {
 					  def scmVars = checkout([
                         $class: 'GitSCM',
@@ -79,7 +79,7 @@ node {
                //sh("kubectl apply -f k8s/deployment.yml")
 			   //sh("kubectl apply -f k8s/service.yml")   
 						}
-					}
+				//	}
 			  }
 //		}
 }
