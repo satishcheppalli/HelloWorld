@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    //agent any
 	def env = 'dev'
 	def project = 'fsc'  
 	def appName = 'helloworld'    
