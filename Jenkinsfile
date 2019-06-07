@@ -1,4 +1,4 @@
-pipeline {
+node {
     //agent any
 	def env = 'dev'
 	def project = 'fsc'  
