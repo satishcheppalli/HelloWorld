@@ -53,8 +53,8 @@ node {
                 sh "docker login -u ${userName} -p 'Ur6G[M>frZ5qMsWp{<QP' iad.ocir.io"
     
                 sh "docker push ${image}:${imageVersion}" 
-              //  env.GIT_COMMIT = "${imageVersion}"
-              //  sh "export GIT_COMMIT=${env.GIT_COMMIT}"
+                env.GIT_COMMIT = "${imageVersion}"
+                sh "export GIT_COMMIT=${env.GIT_COMMIT}"
                 }
              //  }
             }
@@ -73,7 +73,7 @@ node {
 					
            // sh("kubectl get ns ${namespace} || kubectl create ns ${namespace}")    
             //sh("sed -i 's#${image}:latest#${image}:${imageVersion}#g' ./k8s/${env}/*.yml") 
-			sh("sed -i 's#iad.ocir.io/fedexoraclecloud/fsc/helloworld:latest#iad.ocir.io/fedexoraclecloud/fsc/helloworld:${imageVersion}#g' ./k8s/${env}/*.yml")
+			sh("sed -i 's#iad.ocir.io/fedexoraclecloud/fsc/helloworld:latest#iad.ocir.io/fedexoraclecloud/fsc/helloworld:${scmVars.GIT_COMMIT}#g' ./k8s/${env}/*.yml")
 			///sh("sed -i 's#namespace: dev#namespace: satish-ns#g' ./k8s/*.yml")    			
             sh("kubectl --namespace=${namespace} apply -f k8s/${env}/deployment.yml")
             sh("kubectl --namespace=${namespace} apply -f k8s/${env}/service.yml")        
