@@ -3,7 +3,7 @@ node {
 	def env = 'dev'
 	def project = 'fsc'  
 	def appName = 'helloworld'    
-	def imageVersion = "${env.BUILD_NUMBER}.0.0"  
+	def imageVersion = "${BUILD_NUMBER}.0.0"
 	def namespace = 'satish-ns'  
 	def image = "iad.ocir.io/fedexoraclecloud/${project}/${appName}"
 	def gitRepoUrl = 'https://github.com/satishcheppalli/HelloWorld.git'
