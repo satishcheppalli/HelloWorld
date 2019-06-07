@@ -53,8 +53,8 @@ node {
                 sh "docker login -u ${userName} -p 'Ur6G[M>frZ5qMsWp{<QP' iad.ocir.io"
     
                 sh "docker push ${image}:${imageVersion}" 
-                env.GIT_COMMIT = "${imageVersion}"
-                sh "export GIT_COMMIT=${env.GIT_COMMIT}"
+              //  env.GIT_COMMIT = "${imageVersion}"
+              //  sh "export GIT_COMMIT=${env.GIT_COMMIT}"
                 }
              //  }
             }
@@ -62,14 +62,14 @@ node {
         stage('Deploy Application') {  
 			//steps {	
 				script {
-					  def scmVars = checkout([
+					/*  def scmVars = checkout([
                         $class: 'GitSCM',
                         doGenerateSubmoduleConfigurations: false,
                         userRemoteConfigs: [[
                             url: "${gitRepoUrl}"
                           ]],
                         branches: [ [name: "${branch}"] ]
-                      ])
+                      ])*/
 					
            // sh("kubectl get ns ${namespace} || kubectl create ns ${namespace}")    
             sh("sed -i 's#${image}:latest#${image}:${imageVersion}#g' ./k8s/${env}/*.yml") 
@@ -78,7 +78,7 @@ node {
             sh("kubectl --namespace=${namespace} apply -f k8s/${env}/service.yml")        
                //sh("kubectl apply -f k8s/deployment.yml")
 			   //sh("kubectl apply -f k8s/service.yml")   
-						}
+						//}
 				//	}
 			  }
 //		}
