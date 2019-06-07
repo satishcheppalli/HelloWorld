@@ -35,7 +35,7 @@ node {
                           ]],
                         branches: [ [name: "${branch}"] ]
                       ])
-                sh "docker build -f Dockerfile -t ${image}:${imageVersion} ." 
+                sh "docker build -f Dockerfile -t ${image}:${scmVars.GIT_COMMIT} ." 
                 }
            // }
         }
@@ -52,8 +52,8 @@ node {
                       ])
                 sh "docker login -u ${userName} -p 'Ur6G[M>frZ5qMsWp{<QP' iad.ocir.io"
     
-                sh "docker push ${image}:${imageVersion}" 
-                env.GIT_COMMIT = "${imageVersion}"
+                sh "docker push ${image}:${scmVars.GIT_COMMIT}" 
+                env.GIT_COMMIT = "${scmVars.GIT_COMMIT}"
                 sh "export GIT_COMMIT=${env.GIT_COMMIT}"
                 }
              //  }
