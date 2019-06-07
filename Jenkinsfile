@@ -72,7 +72,8 @@ node {
                       ])*/
 					
            // sh("kubectl get ns ${namespace} || kubectl create ns ${namespace}")    
-            sh("sed -i 's#"${image}:latest#${image}:${imageVersion}"#g' ./k8s/${env}/*.yml") 
+            //sh("sed -i 's#${image}:latest#${image}:${imageVersion}#g' ./k8s/${env}/*.yml") 
+			sh("sed -i 's#iad.ocir.io/fedexoraclecloud/fsc/helloworld:latest#iad.ocir.io/fedexoraclecloud/fsc/helloworld:${imageVersion}#g' ./k8s/${env}/*.yml")
 			///sh("sed -i 's#namespace: dev#namespace: satish-ns#g' ./k8s/*.yml")    			
             sh("kubectl --namespace=${namespace} apply -f k8s/${env}/deployment.yml")
             sh("kubectl --namespace=${namespace} apply -f k8s/${env}/service.yml")        
