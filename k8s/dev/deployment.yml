@@ -7,6 +7,11 @@ metadata:
 spec:
   replicas: 5
   revisionHistoryLimit: 0
+  strategy:
+  type: RollingUpdate
+  rollingUpdate:
+    maxSurge: 1
+    maxUnavailable: 25%
   selector:
     matchLabels:
       app: helloworld
@@ -21,5 +26,13 @@ spec:
         imagePullPolicy: Always
         ports:
         - containerPort: 8484
+        readinessProbe:
+          httpGet:
+             path: /
+             port: 8484
+             initialDelaySeconds: 5
+             timeoutSeconds: 10
+             periodSeconds: 5
+             successThreshold: 1
       imagePullSecrets:  
       - name: satishocirsecret
