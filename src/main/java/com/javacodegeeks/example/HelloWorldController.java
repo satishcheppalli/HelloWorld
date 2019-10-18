@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class HelloWorldController {
 
 	@GetMapping("/hello")
-	public String sayHello() {
+	public String sayHello() throws InterruptedException {
 		Thread.sleep(60 * 1000);
 		return "Hello world with rolling updates...";
 	}
