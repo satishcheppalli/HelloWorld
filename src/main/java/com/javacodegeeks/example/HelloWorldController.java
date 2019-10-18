@@ -11,7 +11,7 @@ public class HelloWorldController {
 		for(int i=0; i<=10000;i++){
 			System.out.println(i);
 		}
-		//Thread.sleep(60 * 1000);
+		Thread.sleep(60 * 1000);
 		return "Hello world with rolling updates...";
 	}
 }
