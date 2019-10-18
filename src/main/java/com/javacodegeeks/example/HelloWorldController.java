@@ -8,6 +8,7 @@ public class HelloWorldController {
 
 	@GetMapping("/hello")
 	public String sayHello() {
+		Thread.sleep(60 * 1000);
 		return "Hello world with rolling updates...";
 	}
 }
