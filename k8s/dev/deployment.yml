@@ -9,11 +9,11 @@ metadata:
 spec:
   replicas: 4
   revisionHistoryLimit: 2
-#  strategy:
-#  type: RollingUpdate
-#  rollingUpdate:
-#    maxSurge: 1
-#    maxUnavailable: 25%
+  strategy:
+  type: RollingUpdate
+  rollingUpdate:
+    maxSurge: 2
+    maxUnavailable: 1
   selector:
     matchLabels:
       app: helloworld
