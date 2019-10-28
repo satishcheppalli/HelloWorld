@@ -7,12 +7,12 @@ metadata:
   labels:
     app: helloworld
 spec:
-  replicas: 1
-  revisionHistoryLimit: 2
+  replicas: 5
+  revisionHistoryLimit: 0
   strategy:
     type: RollingUpdate
     rollingUpdate:
-     maxSurge: 0
+     maxSurge: 2
      maxUnavailable: 1
   selector:
     matchLabels:
