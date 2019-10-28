@@ -6,9 +6,9 @@ metadata:
   name: helloworld
   labels:
     app: helloworld
-spec:
-  replicas: 10
-  revisionHistoryLimit: 0
+#spec:
+#  replicas: 10
+#  revisionHistoryLimit: 0
 #  strategy:
 #    type: RollingUpdate
 #    rollingUpdate:
