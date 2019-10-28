@@ -55,9 +55,9 @@ spec:
     apiVersion: extensions/v1beta1
     kind: Deployment
     name: helloworld
-  minReplicas: 1
+  minReplicas: 5
   maxReplicas: 10
   targetCPUUtilizationPercentage: 40   
-status:
-  currentReplicas: 1
-  desiredReplicas: 1
+#status:
+#  currentReplicas: 1
+#  desiredReplicas: 1
