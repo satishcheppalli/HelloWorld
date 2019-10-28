@@ -44,6 +44,7 @@ spec:
       imagePullSecrets:  
       - name: satishocirsecret
 ---
+Comment: > 
 apiVersion: autoscaling/v1
 #apiVersion: autoscaling/v2beta1
 kind: HorizontalPodAutoscaler
