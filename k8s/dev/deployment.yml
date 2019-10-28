@@ -7,12 +7,12 @@ metadata:
   labels:
     app: helloworld
 spec:
-  replicas: 2
+  replicas: 5
   revisionHistoryLimit: 0
   strategy:
     type: RollingUpdate
     rollingUpdate:
-     maxSurge: 1
+     maxSurge: 0
      maxUnavailable: 1
   selector:
     matchLabels:
@@ -55,9 +55,9 @@ spec:
     apiVersion: extensions/v1beta1
     kind: Deployment
     name: helloworld
-  minReplicas: 2
+  minReplicas: 1
   maxReplicas: 10
   targetCPUUtilizationPercentage: 40   
-#status:
-#  currentReplicas: 1
-#  desiredReplicas: 1
+status:
+  currentReplicas: 1
+  desiredReplicas: 1
