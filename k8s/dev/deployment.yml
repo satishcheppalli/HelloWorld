@@ -7,12 +7,12 @@ metadata:
   labels:
     app: helloworld
 spec:
-  replicas: 1
+  replicas: 4
   revisionHistoryLimit: 0
   strategy:
     type: RollingUpdate
     rollingUpdate:
-     maxSurge: 0
+     maxSurge: 2
      maxUnavailable: 1
   selector:
     matchLabels:
@@ -44,20 +44,20 @@ spec:
       imagePullSecrets:  
       - name: satishocirsecret
 ---
-apiVersion: autoscaling/v1
-#apiVersion: autoscaling/v2beta1
-kind: HorizontalPodAutoscaler
-metadata:
-  name: helloworldautoscaler
-  namespace: satish-ns
-spec:
-  scaleTargetRef:
-    apiVersion: extensions/v1beta1
-    kind: Deployment
-    name: helloworld
-  minReplicas: 1
-  maxReplicas: 10
-  targetCPUUtilizationPercentage: 40   
-status:
-  currentReplicas: 1
-  desiredReplicas: 1
+#apiVersion: autoscaling/v1
+##apiVersion: autoscaling/v2beta1
+#kind: HorizontalPodAutoscaler
+#metadata:
+#  name: helloworldautoscaler
+#  namespace: satish-ns
+#spec:
+#  scaleTargetRef:
+#    apiVersion: extensions/v1beta1
+#    kind: Deployment
+#    name: helloworld
+#  minReplicas: 1
+#  maxReplicas: 10
+#  targetCPUUtilizationPercentage: 40   
+#status:
+#  currentReplicas: 1
+#  desiredReplicas: 1
