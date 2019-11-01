@@ -1,6 +1,9 @@
 pipeline {
     agent any
-    
+      environment {
+       def scmVars="";
+    }
+
     stages {
         stage('Build jar file') { 
             steps {
@@ -13,7 +16,7 @@ pipeline {
         stage('Build and Create docker image') { 
             steps {
                 script {
-                    def scmVars = checkout([
+                        scmVars = checkout([
                         $class: 'GitSCM',
                         doGenerateSubmoduleConfigurations: false,
                         userRemoteConfigs: [[
