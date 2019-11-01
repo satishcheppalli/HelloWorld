@@ -28,7 +28,7 @@ pipeline {
         stage('Push image to OCIR') { 
             steps {
                 script {
-                    def scmVars = checkout([
+                    /*def scmVars = checkout([
                         $class: 'GitSCM',
                         doGenerateSubmoduleConfigurations: false,
                         userRemoteConfigs: [[
@@ -36,6 +36,7 @@ pipeline {
                           ]],
                         branches: [ [name: '*/master'] ]
                       ])
+			*/
                 sh "docker login -u 'fedexoraclecloud/oracleidentitycloudservice/2750344' -p 'Ur6G[M>frZ5qMsWp{<QP' iad.ocir.io"
     
                 sh "docker push iad.ocir.io/fedexoraclecloud/fsc/helloworld:${scmVars.GIT_COMMIT}" 
@@ -48,7 +49,7 @@ pipeline {
         stage('Deploy Application') {  
 			steps {	
 				script {
-					  def scmVars = checkout([
+			/*		  def scmVars = checkout([
                         $class: 'GitSCM',
                         doGenerateSubmoduleConfigurations: false,
                         userRemoteConfigs: [[
@@ -56,7 +57,7 @@ pipeline {
                           ]],
                         branches: [ [name: '*/master'] ]
                       ])
-					
+			*/		
             sh("sed -i 's#iad.ocir.io/fedexoraclecloud/fsc/helloworld:latest#iad.ocir.io/fedexoraclecloud/fsc/helloworld:${scmVars.GIT_COMMIT}#g' ./k8s/dev/*.yml")   			
             sh("kubectl --namespace=satish-ns apply -f k8s/dev/deployment.yml")
             sh("kubectl --namespace=satish-ns apply -f k8s/dev/service.yml")
