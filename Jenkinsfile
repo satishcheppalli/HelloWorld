@@ -26,7 +26,7 @@ pipeline {
                       ])
                 sh "docker build -f Dockerfile -t iad.ocir.io/fedexoraclecloud/fsc/helloworld:${env.BUILD_ID} ." 
 		//sh "docker build -f Dockerfile -t iad.ocir.io/fedexoraclecloud/fsc/helloworld:latest ."	
-		sh "docker tag iad.ocir.io/fedexoraclecloud/fsc/helloworld:${env.BUILD_ID} iad.ocir.io/fedexoraclecloud/fsc/helloworld:latest" 	
+		sh "docker tag ${env.BUILD_ID} iad.ocir.io/fedexoraclecloud/fsc/helloworld:latest" 	
                 }
             }
         }
