@@ -25,7 +25,7 @@ pipeline {
                         branches: [ [name: '*/master'] ]
                       ])
                 sh "docker build -f Dockerfile -t iad.ocir.io/fedexoraclecloud/fsc/helloworld:${env.BUILD_ID} ." 
-		sh "docker build -f Dockerfile -t iad.ocir.io/fedexoraclecloud/fsc/helloworld:latest ."	
+		//sh "docker build -f Dockerfile -t iad.ocir.io/fedexoraclecloud/fsc/helloworld:latest ."	
                 }
             }
         }
@@ -34,7 +34,7 @@ pipeline {
                 script {
                 sh "docker login -u 'fedexoraclecloud/oracleidentitycloudservice/2750344' -p 'Ur6G[M>frZ5qMsWp{<QP' iad.ocir.io"
                 sh "docker push iad.ocir.io/fedexoraclecloud/fsc/helloworld:${env.BUILD_ID}" 
-		 sh "docker push iad.ocir.io/fedexoraclecloud/fsc/helloworld:latest"	
+		// sh "docker push iad.ocir.io/fedexoraclecloud/fsc/helloworld:latest"	
                 //env.GIT_COMMIT = scmVars.GIT_COMMIT
                 //sh "export GIT_COMMIT=${env.GIT_COMMIT}"
                 }
@@ -44,7 +44,7 @@ pipeline {
         stage('Deploy Application') {  
 			steps {	
 				script {	
-				  //  sh("sed -i 's#iad.ocir.io/fedexoraclecloud/fsc/helloworld:latest#iad.ocir.io/fedexoraclecloud/fsc/helloworld:${env.BUILD_ID}#g' ./k8s/dev/*.yml")   			
+				    sh("sed -i 's#iad.ocir.io/fedexoraclecloud/fsc/helloworld:latest#iad.ocir.io/fedexoraclecloud/fsc/helloworld:${env.BUILD_ID}#g' ./k8s/dev/*.yml")   			
 				    sh("kubectl --namespace=satish-ns apply -f k8s/dev/deployment.yml")
 				    sh("kubectl --namespace=satish-ns apply -f k8s/dev/service.yml")
 						}
