@@ -26,7 +26,7 @@ pipeline {
                       ])
                 sh "docker build -f Dockerfile -t iad.ocir.io/fedexoraclecloud/fsc/helloworld:${env.BUILD_ID} ." 
 		//sh "docker build -f Dockerfile -t iad.ocir.io/fedexoraclecloud/fsc/helloworld:latest ."	
-		sh "docker tag \$ (docker images | grep 'helloworld' | awk { print \$3 })"  iad.ocir.io/fedexoraclecloud/fsc/helloworld:latest"	
+		sh "docker tag \$ (docker images | grep 'helloworld' | awk { print \$3 }) iad.ocir.io/fedexoraclecloud/fsc/helloworld:latest"	
                 }
             }
         }
