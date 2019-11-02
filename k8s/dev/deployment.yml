@@ -33,14 +33,14 @@ spec:
         imagePullPolicy: Always
         ports:
         - containerPort: 8484
-#        readinessProbe:
-#          httpGet:
-#             path: /
-#             port: 8484
-#             initialDelaySeconds: 5
-#             timeoutSeconds: 10
-#             periodSeconds: 5
-#             successThreshold: 1
+        readinessProbe:
+          httpGet:
+             path: /hello
+             port: 8484
+             initialDelaySeconds: 5
+             timeoutSeconds: 10
+             periodSeconds: 5
+             successThreshold: 1
       imagePullSecrets:  
       - name: satishocirsecret
 ---
