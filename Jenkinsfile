@@ -45,7 +45,7 @@ pipeline {
 		//sh "docker rmi -f ${env.image}"
 			dockerImage.push()
 			dockerImage.push('latest')
-			//sh "docker rmi -f ${dockerImage.id}"
+			sh "docker rmi -f ${dockerImage.id}"
                 }
                }
             }
