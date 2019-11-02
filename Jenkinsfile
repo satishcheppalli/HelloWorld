@@ -38,7 +38,7 @@ pipeline {
 		// sh "docker push iad.ocir.io/fedexoraclecloud/fsc/helloworld:latest"	
                 //env.GIT_COMMIT = scmVars.GIT_COMMIT
                 //sh "export GIT_COMMIT=${env.GIT_COMMIT}"
-		sh "docker rmi -f \$ (docker images | grep 'helloworld' | awk { print $3 })"
+		sh "docker rmi -f \$ (docker images | grep 'helloworld' | awk { print \$3 })"
                 }
                }
             }
