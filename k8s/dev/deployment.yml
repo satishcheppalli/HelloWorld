@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
       - name: helloworld
-        image: "iad.ocir.io/fedexoraclecloud/fsc/helloworld:latest"
+        image: iad.ocir.io/fedexoraclecloud/fsc/helloworld:latest
         resources:
          limits:
             cpu: 500m
