@@ -12,6 +12,6 @@ public class HelloWorldController {
 			System.out.println(i);
 		}
 		Thread.sleep(30 * 1000);*/
-		return "Hello world with rolling updates---****";
+		return "Hello world with rolling updates$$$";
 	}
 }
