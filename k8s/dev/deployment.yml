@@ -27,9 +27,9 @@ spec:
         image: iad.ocir.io/fedexoraclecloud/fsc/helloworld:latest
         resources:
          limits:
-            cpu: 800m
+            cpu: 600m
          requests:
-            cpu: 800m
+            cpu: 600m
         imagePullPolicy: Always
         ports:
         - containerPort: 8484
