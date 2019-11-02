@@ -2,7 +2,7 @@ pipeline {
     agent any
       environment {
        def scmVars="";
-	def image="$ (docker images | grep 'helloworld' | awk { print $3 })"	      
+	def image="\$ (docker images | grep 'helloworld' | awk { print \$3 })"	      
     }
 
     stages {
