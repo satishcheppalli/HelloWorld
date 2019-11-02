@@ -38,12 +38,14 @@ pipeline {
             steps {
                 script {
                 sh "docker login -u 'fedexoraclecloud/oracleidentitycloudservice/2750344' -p 'Ur6G[M>frZ5qMsWp{<QP' iad.ocir.io"
-                sh "docker push iad.ocir.io/fedexoraclecloud/fsc/helloworld:${env.BUILD_ID}" 
+               // sh "docker push iad.ocir.io/fedexoraclecloud/fsc/helloworld:${env.BUILD_ID}" 
 		// sh "docker push iad.ocir.io/fedexoraclecloud/fsc/helloworld:latest"	
                 //env.GIT_COMMIT = scmVars.GIT_COMMIT
                 //sh "export GIT_COMMIT=${env.GIT_COMMIT}"
 		//sh "docker rmi -f ${env.image}"
-			sh "docker rmi -f ${env.dockerImage.id}"
+			dockerImage.push()
+			dockerImage.push('latest')
+			sh "docker rmi -f ${dockerImage.id}"
                 }
                }
             }
