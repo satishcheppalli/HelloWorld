@@ -44,7 +44,7 @@ pipeline {
                 //sh "export GIT_COMMIT=${env.GIT_COMMIT}"
 		//sh "docker rmi -f ${env.image}"
 			dockerImage.push()
-			dockerImage.push('latest')
+			//dockerImage.push('latest')
 			sh "docker rmi -f ${dockerImage.id}"
                 }
                }
@@ -53,7 +53,7 @@ pipeline {
         stage('Deploy Application') {  
 			steps {	
 				script {	
-				   // sh("sed -i 's#iad.ocir.io/fedexoraclecloud/fsc/helloworld:latest#iad.ocir.io/fedexoraclecloud/fsc/helloworld:${env.BUILD_ID}#g' ./k8s/dev/*.yml")   			
+				    sh("sed -i 's#iad.ocir.io/fedexoraclecloud/fsc/helloworld:latest#iad.ocir.io/fedexoraclecloud/fsc/helloworld:${env.BUILD_ID}#g' ./k8s/dev/*.yml")   			
 				    sh("kubectl --namespace=satish-ns apply -f k8s/dev/deployment.yml")
 				    sh("kubectl --namespace=satish-ns apply -f k8s/dev/service.yml")
 						}
