@@ -37,10 +37,10 @@ spec:
           httpGet:
              path: /hello
              port: 8484
-             initialDelaySeconds: 5
-             timeoutSeconds: 10
-             periodSeconds: 5
-             successThreshold: 1
+          initialDelaySeconds: 5
+          timeoutSeconds: 10
+          periodSeconds: 5
+          successThreshold: 1
       imagePullSecrets:  
       - name: satishocirsecret
 ---
