@@ -1,8 +1,6 @@
 pipeline {
     agent any
       environment {
-       def scmVars="";
-	//def image="\$ (docker images | grep 'helloworld' | awk { print \$3 })"
 	dockerImage ="";
 	 DOCKER_IMAGE_TAG = "iad.ocir.io/fedexoraclecloud/fsc/helloworld:${env.BUILD_ID}"      
     }
@@ -29,35 +27,27 @@ pipeline {
                       ])
                 //sh "docker build -f Dockerfile -t iad.ocir.io/fedexoraclecloud/fsc/helloworld:${env.BUILD_ID} ." 
 		dockerImage = docker.build("${env.DOCKER_IMAGE_TAG}",  '-f ./Dockerfile .')	
-		//sh "docker build -f Dockerfile -t iad.ocir.io/fedexoraclecloud/fsc/helloworld:latest ."	
-		//sh "docker tag ${env.image} iad.ocir.io/fedexoraclecloud/fsc/helloworld:latest"	
                 }
             }
         }
         stage('Push image to OCIR') { 
             steps {
                 script {
-                sh "docker login -u 'fedexoraclecloud/oracleidentitycloudservice/2750344' -p 'Ur6G[M>frZ5qMsWp{<QP' iad.ocir.io"
-               // sh "docker push iad.ocir.io/fedexoraclecloud/fsc/helloworld:${env.BUILD_ID}" 
-		// sh "docker push iad.ocir.io/fedexoraclecloud/fsc/helloworld:latest"	
-                //env.GIT_COMMIT = scmVars.GIT_COMMIT
-                //sh "export GIT_COMMIT=${env.GIT_COMMIT}"
-		//sh "docker rmi -f ${env.image}"
+			sh "docker login -u 'fedexoraclecloud/oracleidentitycloudservice/2750344' -p 'Ur6G[M>frZ5qMsWp{<QP' iad.ocir.io"
 			dockerImage.push()
-			//dockerImage.push('latest')
 			sh "docker rmi -f ${dockerImage.id}"
                 }
                }
             }
         
         stage('Deploy Application') {  
-			steps {	
-				script {	
-				    sh("sed -i 's#iad.ocir.io/fedexoraclecloud/fsc/helloworld:latest#iad.ocir.io/fedexoraclecloud/fsc/helloworld:${env.BUILD_ID}#g' ./k8s/dev/*.yml")   			
-				    sh("kubectl --namespace=satish-ns apply -f k8s/dev/deployment.yml")
-				    sh("kubectl --namespace=satish-ns apply -f k8s/dev/service.yml")
-						}
-					}
-			  }
-		}
+		steps {	
+			script {	
+			    sh("sed -i 's#iad.ocir.io/fedexoraclecloud/fsc/helloworld:latest#iad.ocir.io/fedexoraclecloud/fsc/helloworld:${env.BUILD_ID}#g' ./k8s/dev/*.yml")   			
+			    sh("kubectl --namespace=satish-ns apply -f k8s/dev/deployment.yml")
+			    sh("kubectl --namespace=satish-ns apply -f k8s/dev/service.yml")
+				}
+			}
+		  }
+	}
 }
