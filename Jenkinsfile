@@ -30,7 +30,7 @@ pipeline {
                 //sh "docker build -f Dockerfile -t iad.ocir.io/fedexoraclecloud/fsc/helloworld:${env.BUILD_ID} ." 
 		dockerImage = docker.build("${env.DOCKER_IMAGE_TAG}",  '-f ./Dockerfile .')	
 		//sh "docker build -f Dockerfile -t iad.ocir.io/fedexoraclecloud/fsc/helloworld:latest ."	
-		sh "docker tag ${env.image} iad.ocir.io/fedexoraclecloud/fsc/helloworld:latest"	
+		//sh "docker tag ${env.image} iad.ocir.io/fedexoraclecloud/fsc/helloworld:latest"	
                 }
             }
         }
