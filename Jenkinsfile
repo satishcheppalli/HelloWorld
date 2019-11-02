@@ -2,7 +2,9 @@ pipeline {
     agent any
       environment {
        def scmVars="";
-	def image="\$ (docker images | grep 'helloworld' | awk { print \$3 })"	      
+	def image="\$ (docker images | grep 'helloworld' | awk { print \$3 })"
+	dockerImage ="";
+	 DOCKER_IMAGE_TAG = "iad.ocir.io/fedexoraclecloud/fsc/helloworld:${env.BUILD_ID}"      
     }
 
     stages {
@@ -25,9 +27,10 @@ pipeline {
                           ]],
                         branches: [ [name: '*/master'] ]
                       ])
-                sh "docker build -f Dockerfile -t iad.ocir.io/fedexoraclecloud/fsc/helloworld:${env.BUILD_ID} ." 
+                //sh "docker build -f Dockerfile -t iad.ocir.io/fedexoraclecloud/fsc/helloworld:${env.BUILD_ID} ." 
+		dockerImage = docker.build("${env.DOCKER_IMAGE_TAG}",  '-f ./Dockerfile .')	
 		//sh "docker build -f Dockerfile -t iad.ocir.io/fedexoraclecloud/fsc/helloworld:latest ."	
-			sh "docker tag ${env.image} iad.ocir.io/fedexoraclecloud/fsc/helloworld:latest"	
+		sh "docker tag ${env.image} iad.ocir.io/fedexoraclecloud/fsc/helloworld:latest"	
                 }
             }
         }
@@ -39,7 +42,8 @@ pipeline {
 		// sh "docker push iad.ocir.io/fedexoraclecloud/fsc/helloworld:latest"	
                 //env.GIT_COMMIT = scmVars.GIT_COMMIT
                 //sh "export GIT_COMMIT=${env.GIT_COMMIT}"
-		sh "docker rmi -f ${env.image}"
+		//sh "docker rmi -f ${env.image}"
+			sh "docker rmi -f ${env.dockerImage.id}"
                 }
                }
             }
