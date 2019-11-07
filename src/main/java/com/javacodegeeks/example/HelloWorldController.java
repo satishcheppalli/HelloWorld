@@ -29,6 +29,7 @@ public class HelloWorldController {
 		    System.out.println("Unrecognized host");
 		}
 		
-		return "Hello world with rolling updates, hostname: "+hostname+" Host Addr: "+hostAddr;
+		//return "Hello world with rolling updates";
+		return "hostname: "+hostname+" Host Addr: "+hostAddr;
 	}
 }
