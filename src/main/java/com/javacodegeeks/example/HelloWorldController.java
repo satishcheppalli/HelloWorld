@@ -18,7 +18,7 @@ public class HelloWorldController {
 		String hostAddr="******UNKONWN HOST ADDR*******";
 		try {
 			 
-		    InetAddress inetHost = InetAddress.getByName("abcocscl1dva003.logistics.fedex.com");
+		    InetAddress inetHost = InetAddress.getByName("ocscl1dva003.logistics.fedex.com");
 		    hostname = inetHost.getHostName();
 		    hostAddr = inetHost.getHostAddress();
 		    System.out.println("The host name was: " + hostname);
