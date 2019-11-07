@@ -15,13 +15,13 @@ public class HelloWorldController {
 		}
 		Thread.sleep(30 * 1000);*/
 		String hostname="******UNKONWN HOST*******";
-		String hosrAddr="******UNKONWN HOST ADDR*******";
+		String hostAddr="******UNKONWN HOST ADDR*******";
 		try {
 			 
 		    InetAddress inetHost = InetAddress.getByName("ocscl1dva003.logistics.fedex.com");
 		    hostname = inetHost.getHostName();
-		    hosrAddr = inetHost.getHostAddress();
-		    System.out.println("The host name was: " + hostName);
+		    hostAddr = inetHost.getHostAddress();
+		    System.out.println("The host name was: " + hostname);
 		    System.out.println("The hosts IP address is: " + inetHost.getHostAddress());
 		 
 		} catch(UnknownHostException ex) {
@@ -29,6 +29,6 @@ public class HelloWorldController {
 		    System.out.println("Unrecognized host");
 		}
 		
-		return "Hello world with rolling updates, hostname: "+hostname+" Host Addr: "+hosrAddr;
+		return "Hello world with rolling updates, hostname: "+hostname+" Host Addr: "+hostAddr;
 	}
 }
