@@ -45,6 +45,88 @@
 			</plugin>
 		</plugins>
 	</build>
-
+	<profiles>
+		<profile>
+				<id>GENCO</id>
+				<distributionManagement>
+						<repository>
+								<id>releases</id>
+								<url>http://vxpod01jenkdevops1.genco.com:8081/nexus/content/repositories/releases</url>
+						</repository>
+						<snapshotRepository>
+								<id>snapshots</id>
+								<url>http://vxpod01jenkdevops1.genco.com:8081/nexus/content/repositories/snapshots</url>
+						</snapshotRepository>
+						<site>
+								<id>site</id>
+								<url>dav:http://vxpod01jenkdevops1.genco.com:8081/nexus/content/sites/site/${project.groupId}/${project.version}/</url>
+						</site>                        
+				</distributionManagement>              
+		</profile>
+		<profile>
+			<!-- Configurations for generating Sonar metrics -->
+			<id>sonar</id>
+			
+			<properties>
+		  		<!-- Sonar configurations -->
+				<sonar.verbose>true</sonar.verbose>
+				<sonar.core.codeCoveragePlugin>jacoco</sonar.core.codeCoveragePlugin>
+				<sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
+				<sonar.surefire.reportsPath>${project.build.directory}/surefire-reports</sonar.surefire.reportsPath>
+				<sonar.jacoco.reportPath>${jacocoDirectory}/jacoco.exec</sonar.jacoco.reportPath>
+			</properties>
+			
+			<build>
+				<pluginManagement>
+					<plugins>
+				      	<plugin>
+			   	     		<groupId>org.sonarsource.scanner.maven</groupId>
+			      	  		<artifactId>sonar-maven-plugin</artifactId>
+			      	  		<version>3.4.0.905</version>
+			      		</plugin> 
+					</plugins>
+				</pluginManagement>
+			</build>
+			<reporting>
+				<plugins>
+			  		<plugin>
+			  			<groupId>org.codehaus.sonar-plugins</groupId>
+			  			<artifactId>maven-report</artifactId>
+			  			<version>0.1</version>
+			  		</plugin>
+				</plugins>
+			</reporting>
+		</profile>
+		<!-- Profile to handle JCite-related processing -->    
+        <profile>
+            <id>jcite-processing</id>
+            <activation>
+            	<file>
+            	    <exists>${jciteCommandPath}</exists>
+            	</file>
+            </activation>
+			<reporting>
+				<plugins>
+		          	<!-- Render StyleGuide report for entire project -->
+					<plugin>
+						<groupId>org.simpliccity.styleguide</groupId>
+						<artifactId>styleguide-maven-plugin</artifactId>
+						<version>${styleGuideVersion}</version>
+						<configuration>
+							<reportLabel>${displayTitle}</reportLabel>
+							<failOnError>false</failOnError>
+						</configuration>
+						<reportSets>
+							<reportSet>
+								<reports>
+									<report>aggregate</report>
+								</reports>
+							</reportSet>
+						</reportSets>
+					</plugin>
+				</plugins>
+			</reporting>     
+        </profile> 
+	</profiles>
 
 </project>
