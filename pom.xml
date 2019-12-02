@@ -40,7 +40,9 @@
 		<dependency>
 			<groupId>org.simpliccity.styleguide</groupId>
 			<artifactId>styleguide-core</artifactId>
+			<version>${styleGuideVersion}</version>
 			<scope>provided</scope>
+			<optional>true</optional>
 		</dependency>
 	</dependencies>
 
