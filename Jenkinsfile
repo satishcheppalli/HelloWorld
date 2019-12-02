@@ -18,7 +18,7 @@ pipeline {
             steps {
 				withMaven(maven: 'Maven339', jdk: 'JDK8', mavenSettingsConfig: 'bb40ec16-56e1-440a-8fdd-97af1a8b248f', mavenLocalRepo: '${BASE}/maven-repositories/${EXECUTOR_NUMBER}', options: [artifactsPublisher(disabled: true)])
 				{
-					sh "sonar:sonar -U -Psonar,${BUILD_ENVIRONMENT} -DjacocoDirectory=\"${WORKSPACE}/jacoco\" -Dsonar.branch=master"
+					sh "mvn sonar:sonar -U -Psonar,${BUILD_ENVIRONMENT} -DjacocoDirectory=\"${WORKSPACE}/jacoco\" -Dsonar.branch=master"
 				}
             }
         }
@@ -26,7 +26,7 @@ pipeline {
             steps {
 				withMaven(maven: 'Maven339', jdk: 'JDK8', mavenSettingsConfig: 'bb40ec16-56e1-440a-8fdd-97af1a8b248f', mavenLocalRepo: '${BASE}/maven-repositories/${EXECUTOR_NUMBER}', options: [artifactsPublisher(disabled: true)])
 				{
-					sh "site:site site:deploy -U -P GENCO -DjciteCommandPath=\"/home/jksadmin/.jenkins/tools/com.cloudbees.jenkins.plugins.customtools.CustomTool/JCite/jcite-1.13.0/bin/jcite.sh\""
+					sh "mvn site:site site:deploy -U -P GENCO -DjciteCommandPath=\"/home/jksadmin/.jenkins/tools/com.cloudbees.jenkins.plugins.customtools.CustomTool/JCite/jcite-1.13.0/bin/jcite.sh\""
 				}
             }
         } 
