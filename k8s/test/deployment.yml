@@ -1,0 +1,63 @@
+apiVersion: extensions/v1beta1
+#apiVersion: apps/v1beta2
+#apiVersion: v1
+kind: Deployment
+metadata:
+  name: helloworld
+  labels:
+    app: helloworld
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+     maxSurge: 0
+     maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: helloworld
+  template:
+    metadata:
+      labels:
+        app: helloworld
+    spec:
+      containers:
+      - name: helloworld
+        image: iad.ocir.io/fedexoraclecloud/fsc/helloworld:latest
+        resources:
+         limits:
+            cpu: 600m
+         requests:
+            cpu: 600m
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8484
+#        readinessProbe:
+#          httpGet:
+#             path: /helloo
+#             port: 8484
+#          initialDelaySeconds: 5
+#          timeoutSeconds: 10
+#          periodSeconds: 5
+#          successThreshold: 1
+      imagePullSecrets:  
+      - name: satishocirsecret
+---
+apiVersion: autoscaling/v1
+#apiVersion: autoscaling/v2beta1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: helloworldautoscaler
+  namespace: satish-ns
+spec:
+  scaleTargetRef:
+    apiVersion: extensions/v1beta1
+    kind: Deployment
+    name: helloworld
+  minReplicas: 1
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 40   
+status:
+  currentReplicas: 1
+  desiredReplicas: 1
