@@ -41,15 +41,15 @@ spec:
 #          timeoutSeconds: 10
 #          periodSeconds: 5
 #          successThreshold: 1
-      imagePullSecrets:  
-      - name: satishocirsecret
+      imagePullSecrets:
+      - name: fxlsc-ocir-secret
+#      - name: satishocirsecret
 ---
 apiVersion: autoscaling/v1
 #apiVersion: autoscaling/v2beta1
 kind: HorizontalPodAutoscaler
 metadata:
   name: helloworldautoscaler
-  namespace: satish-ns
 spec:
   scaleTargetRef:
     apiVersion: extensions/v1beta1
