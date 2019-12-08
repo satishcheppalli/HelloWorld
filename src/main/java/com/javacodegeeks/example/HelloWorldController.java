@@ -16,7 +16,7 @@ public class HelloWorldController {
 		Thread.sleep(30 * 1000);*/
 		String hostname="******UNKONWN HOST*******";
 		String hostAddr="******UNKONWN HOST ADDR*******";
-		try {
+		/*try {
 			 
 		    InetAddress inetHost = InetAddress.getByName("ocscl2dva004.logistics.fedex.com");
 		    hostname = inetHost.getHostName();
@@ -27,9 +27,9 @@ public class HelloWorldController {
 		} catch(UnknownHostException ex) {
 		 
 		    System.out.println("Unrecognized host");
-		}
+		}*/
 		
-		//return "Hello world !!!!!!";
-		return "hostname: "+hostname+" Host Addr: "+hostAddr;
+		return "Hello world !!!!!!";
+		//return "hostname: "+hostname+" Host Addr: "+hostAddr;
 	}
 }
