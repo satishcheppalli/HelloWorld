@@ -60,8 +60,8 @@ pipeline {
 		steps {	
 			script {	
 			    sh("sed -i 's#iad.ocir.io/fedexoraclecloud/fsc/helloworld:latest#iad.ocir.io/fedexoraclecloud/fsc/helloworld:${env.BUILD_ID}#g' ./k8s/dev/*.yml")   			
-			    sh("kubectl --namespace=test apply -f k8s/dev/deployment.yml")
-			    sh("kubectl --namespace=test apply -f k8s/dev/service.yml")
+			    sh("kubectl --namespace=satish-ns apply -f k8s/dev/deployment.yml")
+			    sh("kubectl --namespace=satish-ns apply -f k8s/dev/service.yml")
 				}
 			}
 		  }
